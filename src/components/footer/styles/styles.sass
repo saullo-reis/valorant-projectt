@@ -1,0 +1,15 @@
+@use '../../../styles/variable'
+@use '../../../styles/mixins'    
+
+.footer
+    height: 45px
+    @include mixins.flex-center
+    align-items: flex-end
+    background-color: variable.$primaryColor
+    &-text
+        color: variable.$secundaryColor
+        font-weight: 700
+        text-shadow: none
+        display: flex
+        justify-content: center
+        align-items: center
