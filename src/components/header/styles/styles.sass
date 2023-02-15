@@ -7,19 +7,37 @@
     align-items: center
     background-color: variable.$primaryColor
     padding: 10px
+    position: relative
     &-logo
        color: variable.$tertiaryColor
-    &-team
-        display: flex
-        justify-content: space-between
-        width: 70px
-        background-color: white
-        padding: 10px
+       font-size: 20px
+    &-button
+        background: none
         cursor: pointer
-        border-radius: 8px
-        p
-            font-size: 15px
-            
+        border: none
+        svg
+            font-size: 26px
+            color: variable.$tertiaryColor
+    &-menu
+        position: absolute 
+        right: 24px
+        background-color: white
+        padding: 20px
+        z-index: 2
+        nav
+            display: flex
+            flex-direction: column
+            text-align: center
+            a
+                color: variable.$primaryColor
+                margin: 10px 0
+                text-shadow: none
+                padding: 5px
+                border-radius: 8px
+                &:hover
+                    background-color: variable.$tertiaryColor
+                    box-shadow: 2px 2px 5px black
+
 
 
         
