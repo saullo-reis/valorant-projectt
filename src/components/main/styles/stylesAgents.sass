@@ -1,0 +1,40 @@
+@use '../../../styles/mixins'
+@use '../../../styles/variable'
+
+.agents
+    @include mixins.flex-center
+    flex-flow: row wrap
+    padding: 150px 0
+    height: 60vh
+    &-title
+        color: variable.$tertiaryColor
+        font-size: 40px
+    &-list
+        @include mixins.flex-center
+        flex-flow: row wrap
+        &-items
+            @include mixins.flex-center
+            justify-content: space-between
+            flex-direction: column
+            animation: slideLeft .6s ease forwards
+            animation-iteration-count: 1
+            margin: 20px
+            height: 120px
+            cursor: pointer
+            &:hover
+                background: linear-gradient(variable.$secundaryColor, variable.$tertiaryColor)
+            &-img
+                width: 100px
+            &-name
+                color: variable.$tertiaryColor
+                background-color: variable.$primaryColor
+                width: 100%
+                text-align: center
+
+@keyframes slideLeft
+    0%
+        opacity: 0
+        transform: translateY(60px)
+    100%
+        opacity: 1
+        transform: translateY(0)
