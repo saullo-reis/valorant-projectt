@@ -1,16 +1,42 @@
 import { IoIosPeople } from "react-icons/io";
 import "./styles/styles.sass";
+import {GiHamburgerMenu } from 'react-icons/gi'
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
 export const Header = () => {
+  const [ menu, setMenu ] = useState<string>('none')
+
+  const handleClick = () => {
+    if(menu === 'none'){
+      setMenu('flex')
+    }
+    else{
+      setMenu('none')
+    }
+  }
+
+  console.log(menu)
   return (
     <section className="header">
-      <h1 className="header-logo">ValoComp</h1>
-      <button className="header-team" name="buttonTeam">
-        <p className="header-team-icon">
-          <IoIosPeople />
-        </p>
-        <p className="header-team-number">0/5</p>
-      </button>
+      <Link to={'/'} className="header-logo">ValoQuiz</Link>
+      <div>
+        <button
+          className="header-button"
+          onClick={() => {
+            handleClick();
+          }}
+        >
+          <GiHamburgerMenu />
+        </button>
+        <div className="header-menu" style={{ display: menu }}>
+          <nav>
+            <Link to={"/agentes"}>Agentes</Link>
+            <Link to={"/"}>Armas</Link>
+            <Link to={"/"}>Quiz</Link>
+          </nav>
+        </div>
+      </div>
     </section>
   );
 };
