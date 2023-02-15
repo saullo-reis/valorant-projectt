@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
-import { getAgents } from "../../getAgents/agents"
+import { getAgents } from "../../../gets/get"
 import { AgentType } from "./agents-type"
-import './styles/styles.sass'
+import '../styles/stylesAgents.sass'
 
 export const Agents = () => {
     const[agents, setAgents] = useState<AgentType[]>([])
@@ -9,25 +9,39 @@ export const Agents = () => {
     useEffect(()=> {
         const fetchData = async () => {
             const response = await getAgents()
-            setAgents(response.data)
+            const responseMap = response.data.map((element: AgentType) => {
+              if(element.isPlayableCharacter === true){
+                return element
+              }
+              else{
+                return {}
+              }
+            })
+            setAgents(responseMap)
         } 
         fetchData()
     },[])
 
     return (
-      <section className="section-agents">
-        <h1 className="title">AGENTES</h1>
-        <ul className="agents">
+      <section className="agents">
+        <h1 className="agents-title">AGENTES</h1>
+        <ul className="agents-list">
           {agents.map((element, index) => {
             return (
-              <li key={index} className="agents-box">
-                <img
-                  className="agents-box-img"
-                  src={element.displayIcon}
-                  alt="img-agent"
-                ></img>
-                <p className="agents-box-name">{element.displayName}</p>
-              </li>
+              <>
+                {element.isPlayableCharacter === true && 
+                  <li key={index} className="agents-list-items">
+                    <img
+                      className="agents-list-items-img"
+                      src={element.displayIcon}
+                      alt="img-agent"
+                    ></img>
+                    <p className="agents-list-items-name">
+                      {element.displayName}
+                    </p>
+                  </li>
+                }
+              </>
             );
           })}
         </ul>

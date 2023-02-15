@@ -1,8 +1,6 @@
 export interface AgentType {
     abilities: Array<object>;
-    assetPath: string;
     background: string;
-    backgroundGradientColors:Array<string>;
     bustPortrait: string;
     characterTags: null;
     description: string;
@@ -20,5 +18,4 @@ export interface AgentType {
     role:object;
     uuid:string;
     voiceLine:object;
-
 }
