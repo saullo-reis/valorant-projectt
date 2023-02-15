@@ -1,13 +1,15 @@
 import React from 'react';
 import {Header} from './components/header/header'
 import './styles/stylesGlobal.sass'
-import { Main } from './components/main/main';
+import { Pages } from './components/main/pages';
+import { Footer } from './components/footer/footer';
 
 function App() {
   return (
     <div className="App">
       <Header/>
-      <Main/>
+      <Pages/>
+      <Footer/>
     </div>
   );
 }
