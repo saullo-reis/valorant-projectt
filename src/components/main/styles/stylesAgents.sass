@@ -14,15 +14,16 @@
         flex-flow: row wrap
         &-items
             @include mixins.flex-center
-            justify-content: space-between
             flex-direction: column
             animation: slideLeft .6s ease forwards
             animation-iteration-count: 1
-            margin: 20px
+            border: solid 1px black
+            background-color: #ffe1e1
             height: 120px
             cursor: pointer
+            transition: .2s
             &:hover
-                background: linear-gradient(variable.$secundaryColor, variable.$tertiaryColor)
+                background-color: variable.$secundaryColor
             &-img
                 width: 100px
             &-name

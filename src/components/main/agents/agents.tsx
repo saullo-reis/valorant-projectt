@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react"
 import { getAgents } from "../../../gets/get"
-import { AgentType } from "./agents-type"
+import { AgentsType } from "../../../utils/types"
 import '../styles/stylesAgents.sass'
+import { Link } from "react-router-dom"
 
 export const Agents = () => {
-    const[agents, setAgents] = useState<AgentType[]>([])
+    const[agents, setAgents] = useState<AgentsType[]>([])
     console.log(agents)
     useEffect(()=> {
         const fetchData = async () => {
             const response = await getAgents()
-            const responseMap = response.data.map((element: AgentType) => {
+            const responseMap = response.data.map((element: AgentsType) => {
               if(element.isPlayableCharacter === true){
                 return element
               }
@@ -29,18 +30,20 @@ export const Agents = () => {
           {agents.map((element, index) => {
             return (
               <>
-                {element.isPlayableCharacter === true && 
+                {element.isPlayableCharacter === true && (
                   <li key={index} className="agents-list-items">
-                    <img
-                      className="agents-list-items-img"
-                      src={element.displayIcon}
-                      alt="img-agent"
-                    ></img>
-                    <p className="agents-list-items-name">
-                      {element.displayName}
-                    </p>
+                    <Link to={`/agente/${element.uuid}`}>
+                      <img
+                        className="agents-list-items-img"
+                        src={element.displayIcon}
+                        alt="img-agent"
+                      ></img>
+                      <p className="agents-list-items-name">
+                        {element.displayName}
+                      </p>
+                    </Link>
                   </li>
-                }
+                )}
               </>
             );
           })}
