@@ -1,0 +1,65 @@
+@use '../../../styles/mixins'
+@use '../../../styles/variable'
+    
+.agent
+    @include mixins.flex-center
+    flex-direction: column
+    margin: 30px
+    &-infos
+        @include mixins.flex-center
+        align-items: flex-start
+        &-card
+            @include mixins.flex-center
+            background-color: variable.$primaryColor
+            border-radius: 8px
+            box-shadow: 3px 3px 5px black
+            flex-direction: column
+            position: relative
+            padding: 10px
+            width: 300px
+            &-image
+                width: 100%
+            &-name
+                color: variable.$tertiaryColor
+            &-role
+                &-image
+                    position: absolute
+                    width: 10%
+                    cursor: pointer
+                    right: 12px
+                    top: 12px
+                    transition: .7s
+                    &:hover
+                        transform: scale(1.1)
+                &-description
+                    background-color: #fff
+                    position: absolute
+                    top: 30px
+                    right: 30px
+                    width: 50%
+                    padding: 20px
+                    text-shadow: none
+                    text-align: center
+    &-abilities    
+        margin: 20px 
+        @include mixins.flex-center
+        flex-flow: row wrap
+        width: 500px
+        &-item
+            width: 150px
+            padding: 10px
+            background-color: variable.$primaryColor
+            height: 200px
+            margin: 20px
+            text-align: center
+            border-radius: 8px
+            box-shadow: 3px 3px 5px black
+            transition: .3s
+            cursor: pointer
+            &:hover
+                transform: scale(0.96)
+            &-image
+                width: 100%
+            &-text
+                color: variable.$tertiaryColor
+                font-size: 13px
