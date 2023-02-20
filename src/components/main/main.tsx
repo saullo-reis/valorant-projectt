@@ -12,8 +12,7 @@ export const Main = () => {
         </h2>
         <nav className='main-buttons'>
           <Link to={"/agentes"}>Agentes</Link>
-          <Link to={"/"}>Armas</Link>
-          <Link to={"/"}>Quiz</Link>
+          <Link to={"/quiz"}>Quiz</Link>
         </nav>
       </section>
     );

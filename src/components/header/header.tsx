@@ -1,25 +1,26 @@
 import { IoIosPeople } from "react-icons/io";
 import "./styles/styles.sass";
-import {GiHamburgerMenu } from 'react-icons/gi'
+import { GiHamburgerMenu } from "react-icons/gi";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
 export const Header = () => {
-  const [ menu, setMenu ] = useState<string>('none')
+  const [menu, setMenu] = useState<string>("none");
 
   const handleClick = () => {
-    if(menu === 'none'){
-      setMenu('flex')
+    if (menu === "none") {
+      setMenu("flex");
+    } else {
+      setMenu("none");
     }
-    else{
-      setMenu('none')
-    }
-  }
+  };
 
-  console.log(menu)
+  console.log(menu);
   return (
     <section className="header">
-      <Link to={'/'} className="header-logo">ValoQuiz</Link>
+      <Link to={"/"} className="header-logo">
+        ValoQuiz
+      </Link>
       <div>
         <button
           className="header-button"
@@ -32,8 +33,7 @@ export const Header = () => {
         <div className="header-menu" style={{ display: menu }}>
           <nav>
             <Link to={"/agentes"}>Agentes</Link>
-            <Link to={"/"}>Armas</Link>
-            <Link to={"/"}>Quiz</Link>
+            <Link to={"/quiz"}>Quiz</Link>
           </nav>
         </div>
       </div>
