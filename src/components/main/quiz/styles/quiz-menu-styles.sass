@@ -1,14 +1,15 @@
 @use '../../../../styles/variable'
 @use '../../../../styles/mixins'  
 
-.quiz
+.menu
     @include mixins.flex-center
     flex-direction: column
     height: 90vh
-    &-button
+    &-button-menu
         background-color: variable.$tertiaryColor
         color: #fff
         width: 300px
+        @include mixins.flex-center
         height: 140px
         border: none
         box-shadow: 2px 2px 5px black
@@ -35,4 +36,3 @@
             box-shadow: 1px 1px 5px black
             &:hover
                 transform: scale(0.96)
-            
