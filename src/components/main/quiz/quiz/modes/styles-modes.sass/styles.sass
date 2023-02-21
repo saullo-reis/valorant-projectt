@@ -1,0 +1,71 @@
+@use "../../../../../../styles/variable"
+@use "../../../../../../styles/mixins"
+
+.section
+    height: 93vh
+    @include mixins.flex-center
+    .quiz
+        @include mixins.flex-center
+        flex-direction: column
+        background-color: #ffebeb
+        padding: 20px
+        border-radius: 10px
+        box-shadow: 2px 2px 5px black
+        &-pontuation
+            color: variable.$tertiaryColor
+            margin: 20px
+        &-questions
+            @include mixins.flex-center
+            flex-direction: column
+            margin: 20px
+            h1
+                color: variable.$tertiaryColor
+            ul
+                @include mixins.flex-center
+                flex-direction: column
+                li
+                    color: #000
+                    text-shadow: none
+                    margin: 5px
+                    font-weight: 700
+            img
+                filter: brightness(0%)
+                width: 120px
+        &-input
+            background-color: variable.$secundaryColor
+            border: none
+            border-radius: 8px
+            padding: 5px
+            text-align: center
+            width: 70%
+            color: variable.$tertiaryColor
+            margin: 20px
+        &-button
+            background-color: variable.$tertiaryColor
+            padding: 20px
+            color: #fff
+            cursor: pointer
+            border-radius: 8px
+            margin: 20px
+            border: none
+            transition: .3s
+            &:hover
+                transform: scale(0.97)
+    .final
+        height: 93vh
+        @include mixins.flex-center
+        flex-direction: column
+        &-text
+            color: variable.$tertiaryColor
+            font-weight: 700
+        &-button
+            background-color: variable.$tertiaryColor
+            padding: 20px
+            color: #fff
+            cursor: pointer
+            border-radius: 8px
+            margin: 20px
+            border: none
+            transition: .3s
+            &:hover
+                transform: scale(0.97)

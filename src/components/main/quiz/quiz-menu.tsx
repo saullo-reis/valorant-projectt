@@ -1,19 +1,23 @@
-import "./styles/quiz-styles.sass";
+import "./styles/quiz-menu-styles.sass";
 import { useState } from "react";
+import {useDispatch} from 'react-redux'
+import { addMode } from "../../store/store";
+import { Link } from "react-router-dom";
 
-export const Quiz = () => {
+export const QuizMenu = () => {
   const [mode, setMode] = useState("");
+  const dispatch = useDispatch()
 
   function handleClick(modeButton: string) {
     switch (modeButton) {
-      case "facil":
-        setMode("facil");
+      case "easy":
+        setMode("easy");
         break;
-      case "medio":
-        setMode("medio");
+      case "medium":
+        setMode("medium");
         break;
-      case "dificil":
-        setMode("dificil");
+      case "hard":
+        setMode("hard");
         break;
     }
   }
@@ -27,34 +31,36 @@ export const Quiz = () => {
   console.log(mode);
 
   return (
-    <section className="quiz">
-      <button className="quiz-button">Iniciar</button>
-      <h1 className="quiz-text">Selecione um modo</h1>
-      <ul className="quiz-container">
+    <section className="menu">
+      <Link to={"/quiz/start"} className="menu-button-menu" onClick={() => dispatch(addMode(mode))}>
+        Iniciar
+      </Link>
+      <h1 className="menu-text">Selecione um modo</h1>
+      <ul className="menu-container">
         <li
-          className="quiz-container-buttons"
+          className="menu-container-buttons"
           onClick={() => {
-            handleClick("facil");
+            handleClick("easy");
           }}
-          style={{ backgroundColor: buttonBackGroundColor("facil") }}
+          style={{ backgroundColor: buttonBackGroundColor("easy") }}
         >
           Fácil
         </li>
         <li
-          className="quiz-container-buttons"
+          className="menu-container-buttons"
           onClick={() => {
-            handleClick("medio");
+            handleClick("medium");
           }}
-          style={{ backgroundColor: buttonBackGroundColor("medio") }}
+          style={{ backgroundColor: buttonBackGroundColor("medium") }}
         >
           Médio
         </li>
         <li
-          className="quiz-container-buttons"
+          className="menu-container-buttons"
           onClick={() => {
-            handleClick("dificil");
+            handleClick("hard");
           }}
-          style={{ backgroundColor: buttonBackGroundColor("dificil") }}
+          style={{ backgroundColor: buttonBackGroundColor("hard") }}
         >
           Difícil
         </li>

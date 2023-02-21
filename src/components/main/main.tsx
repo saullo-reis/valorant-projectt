@@ -12,7 +12,7 @@ export const Main = () => {
         </h2>
         <nav className='main-buttons'>
           <Link to={"/agentes"}>Agentes</Link>
-          <Link to={"/quiz"}>Quiz</Link>
+          <Link to={"/menu"}>Quiz</Link>
         </nav>
       </section>
     );
