@@ -21,3 +21,17 @@ export interface AgentTypes {
     displayName: string;
   };
 }
+
+export interface QuizAgentTypes {
+  displayName: string;
+  abilities: Array<{
+    displayName: string;
+  }>
+  displayIcon: string;
+  voiceLine: {
+    mediaList: Array<{
+      wave: string;
+    }>
+  }
+  isPlayableCharacter: boolean;
+}
