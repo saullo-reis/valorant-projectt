@@ -13,10 +13,32 @@ export const HardQuiz = () => {
     Math.floor(Math.random() * 3)
   );
   const [count, setCount] = useState<number>(5);
-  const randomAgent = Math.floor(Math.random() * 21);
+
+  function counter() {
+    setCount(count - 1);
+  }
+  useEffect(() => {
+    if (count !== 0) {
+      setTimeout(counter, 1000);
+    }
+  }, [count]);
 
   useEffect(() => {
+    function reset(){
+      if(count === 0 ){
+        setCount(5)
+        setPontuation(pontuation - 10)
+        setFase(fase + 1)
+        setName("")
+      }
+    }
+    reset()
+  },[count === 0])
+
+  useEffect(() => {
+    setRandomQuestion(Math.floor(Math.random() * 3));
     const fetchData = async () => {
+      const randomAgent = Math.floor(Math.random() * 21);
       const response = await getAgents();
       response.data.splice(7, 1);
       setAgent(response.data[randomAgent]);
@@ -24,19 +46,17 @@ export const HardQuiz = () => {
     fetchData();
   }, [fase]);
 
-
-  console.log(agent);
   function handleClick() {
-    setFase(fase + 1);
-    if (agent !== undefined) {
-      if (name.toLowerCase() === agent.displayName.toLowerCase()) {
-        setPontuation(pontuation + 10);
-      } else {
-        setPontuation(pontuation - 10);
-      }
+    if (
+      agent !== undefined &&
+      name.toLowerCase() === agent.displayName.toLowerCase()
+    ) {
+      setPontuation(pontuation + 10);
+    } else {
+      setPontuation(pontuation - 10);
     }
     setName("");
-    setRandomQuestion(Math.floor(Math.random() * 3));
+    setFase(fase + 1)
   }
 
   return (
@@ -92,7 +112,7 @@ export const HardQuiz = () => {
       {fase === 11 && (
         <section className="final">
           <h1 className="final-text">Pontuação Total: {pontuation}</h1>
-          <Link className="final-button" to={"/quiz"}>
+          <Link className="final-button" to={"/menu"}>
             Jogar Novamente!
           </Link>
         </section>
