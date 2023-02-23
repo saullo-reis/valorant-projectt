@@ -83,13 +83,6 @@ export const HardQuiz = () => {
     setFase(fase + 1);
   }
 
-  document.getElementById('button')?.addEventListener("keydown", function (event) {
-    if (event.key === "Enter") {
-      console.log(event)
-    }
-  });
-
-
   return (
     <section className="section">
       {isLoading === true && <h1>Carregando</h1>}
