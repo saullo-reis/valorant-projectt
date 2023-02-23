@@ -33,7 +33,7 @@ export const Header = () => {
         <div className="header-menu" style={{ display: menu }}>
           <nav>
             <Link to={"/agentes"}>Agentes</Link>
-            <Link to={"/quiz"}>Quiz</Link>
+            <Link to={"/menu"}>Quiz</Link>
           </nav>
         </div>
       </div>
