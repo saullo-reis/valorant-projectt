@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { QuizAgentTypes } from "../../../../../utils/types";
 import { getAgents } from "../../../../../gets/get";
 import { Link } from "react-router-dom";
@@ -13,7 +13,7 @@ export const HardQuiz = () => {
   const [randomQuestion, setRandomQuestion] = useState<number>(
     Math.floor(Math.random() * 3)
   );
-  const [count, setCount] = useState<number>(28);
+  const [count, setCount] = useState<number>(20);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   //LOADING.
@@ -29,26 +29,18 @@ export const HardQuiz = () => {
   // CRONÔMETRO.
 
   function counter() {
-    if (count !== 0) {
-      setCount(count - 1);
-    }
-  }
-  useEffect(() => {
-    if (count !== 0) {
-      setTimeout(counter, 1000);
-    }
-  }, [count]);
-
-  //VERIFICAÇÃO SE PERDEU POR CONTA DO TEMPO.
+    setCount(count - 1);
+  }  
 
   useEffect(() => {
-    function loseForTime() {
-      if (count === 0) {
+    if(isLoading === false){
+      if (count !== 0) {
+        setTimeout(counter, 1000);
+      } else {
         setFase(11);
       }
     }
-    loseForTime();
-  }, [count === 0]);
+  }, [count, isLoading]);
 
   //BUSCANDO UM AGENTE ALEATORIO.
 
@@ -68,7 +60,7 @@ export const HardQuiz = () => {
     }
   }, [fase, agents]);
 
-  //FUNÇÕES DO ONCLICK E DO KEYPRESS.
+  //FUNÇÃO DO ONCLICK
 
   function handleClick() {
     if (
@@ -90,8 +82,7 @@ export const HardQuiz = () => {
         <>
           {fase !== 11 && (
             <div className="quiz">
-              <span>Tempo: {count} </span>
-              <h1 className="quiz-pontuation">Pontuação: {pontuation}/10 </h1>
+              <span className="quiz-counter">{count} </span>
               <div className="quiz-questions">
                 {randomQuestion === 0 && (
                   <>
@@ -116,7 +107,7 @@ export const HardQuiz = () => {
                       {agent?.voiceLine.mediaList.map((element, index) => {
                         return (
                           <li key={index}>
-                            <audio autoPlay src={element.wave}></audio>
+                            <audio autoPlay controls src={element.wave}></audio>
                           </li>
                         );
                       })}
@@ -134,6 +125,7 @@ export const HardQuiz = () => {
                   }
                 }}
               ></input>
+              <h1 className="quiz-pontuation">Pontuação: {pontuation}/10 </h1>
               <button
                 id="button"
                 autoFocus
@@ -157,4 +149,3 @@ export const HardQuiz = () => {
     </section>
   );
 };
-
