@@ -30,7 +30,11 @@ export const Header = () => {
         >
           <GiHamburgerMenu />
         </button>
-        <div className="header-menu" style={{ display: menu }}>
+        <div
+          data-testid="button"
+          className="header-menu"
+          style={{ display: menu }}
+        >
           <nav>
             <Link to={"/agentes"}>Agentes</Link>
             <Link to={"/menu"}>Quiz</Link>

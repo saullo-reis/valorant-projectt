@@ -37,7 +37,7 @@ export const Agents = () => {
       {isLoading === false && (
         <>
           <h1 className="agents-title">AGENTES</h1>
-          <ul className="agents-list">
+          <ul className="agents-list" >
             {agents.map((element, index) => {
               return (
                 <>
