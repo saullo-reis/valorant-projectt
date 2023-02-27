@@ -3,7 +3,7 @@ import { Agents } from "./agents/agents";
 import { Route, Routes } from "react-router-dom";
 import { Main } from "./main";
 import { QuizMenu } from "./quiz/quiz-menu";
-import { Quiz } from "./quiz/quiz/quiz";
+import { Modes } from "./quiz/quiz/quiz-modes";
 
 export const Pages = () => {
   return (
@@ -12,7 +12,7 @@ export const Pages = () => {
       <Route path="/agentes" element={<Agents />}></Route>
       <Route path="/agente/:id" element={<AgentDetails />}></Route>
       <Route path="/menu" element={<QuizMenu/>}></Route>
-      <Route path="/quiz/start" element={<Quiz/>}></Route>
+      <Route path="/quiz/start" element={<Modes/>}></Route>
     </Routes>
   );
 };
