@@ -1,0 +1,15 @@
+@use '../../../../styles/variable'
+    
+.load
+    width: 20px
+    height: 20px
+    border: 10px solid variable.$tertiaryColor
+    border-radius: 50%
+    border-top-color: transparent
+    animation: loading .6s linear infinite
+
+
+@keyframes loading
+    to
+        transform: rotate(360deg)
+        

@@ -5,6 +5,7 @@
     @include mixins.flex-center
     flex-direction: column
     margin: 30px
+    height: 94vh
     &-infos
         @include mixins.flex-center
         align-items: flex-start
@@ -44,6 +45,7 @@
         margin: 20px 
         @include mixins.flex-center
         flex-flow: row wrap
+        max-width: 500px
         &-item
             width: 150px
             padding: 10px
@@ -54,7 +56,6 @@
             border-radius: 8px
             box-shadow: 3px 3px 5px black
             transition: .3s
-            cursor: pointer
             &:hover
                 transform: scale(0.96)
             &-image
