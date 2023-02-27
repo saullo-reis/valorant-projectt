@@ -3,8 +3,9 @@ import { QuizAgentTypes } from "../../../../../utils/types";
 import { getAgents } from "../../../../../gets/get";
 import { Link } from "react-router-dom";
 import "./styles-modes.sass/styles.sass";
+import { Loading } from "../../../../loading/roll/loading";
 
-export const EasyQuiz = () => {
+export const Quiz = (time: {time: number}) => {
   const [agent, setAgent] = useState<QuizAgentTypes>();
   const [agents, setAgents] = useState<QuizAgentTypes[]>([]);
   const [fase, setFase] = useState<number>(1);
@@ -13,6 +14,7 @@ export const EasyQuiz = () => {
   const [randomQuestion, setRandomQuestion] = useState<number>(
     Math.floor(Math.random() * 3)
   );
+  const [count, setCount] = useState<number>(time.time);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   //LOADING.
@@ -24,6 +26,22 @@ export const EasyQuiz = () => {
       }, 2000);
     }
   }, [agent]);
+
+  // CRONÔMETRO.
+
+  function counter() {
+    setCount(count - 1);
+  }
+
+  useEffect(() => {
+    if (isLoading === false) {
+      if (count !== 0) {
+        setTimeout(counter, 1000);
+      } else {
+        setFase(11);
+      }
+    }
+  }, [count, isLoading]);
 
   //BUSCANDO UM AGENTE ALEATORIO.
 
@@ -60,11 +78,12 @@ export const EasyQuiz = () => {
 
   return (
     <section className="section">
-      {isLoading === true && <h1>Carregando</h1>}
+      {isLoading === true && <Loading/>}
       {isLoading === false && (
         <>
           {fase !== 11 && (
             <div className="quiz">
+              <span className="quiz-counter">{count} </span>
               <div className="quiz-questions">
                 {randomQuestion === 0 && (
                   <>
