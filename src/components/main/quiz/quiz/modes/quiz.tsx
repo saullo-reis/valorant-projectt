@@ -36,7 +36,7 @@ export const Quiz = (time: { time: number }) => {
   // CRONÔMETRO.
   const timeoutRef = useRef<any>(null);
   useEffect(() => {
-    if (count === 0) {
+    if (count <= 0) {
       setFase(11);
     }
     function startTimer() {
@@ -49,7 +49,7 @@ export const Quiz = (time: { time: number }) => {
         }
       }, 1000);
     }
-
+    
     startTimer();
     return () => clearTimeout(timeoutRef.current);
   }, [count]);
@@ -84,7 +84,8 @@ export const Quiz = (time: { time: number }) => {
       setTimeModify({add: 1, decrement:0})
     } else {
       setPontuation(pontuation - 1);
-      setCount(count - 2);
+        setCount(count - 2)
+
       setTimeModify({add: 0, decrement:1});
     }
     setName("");
