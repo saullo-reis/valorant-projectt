@@ -28,8 +28,6 @@ export const QuizMenu = () => {
     }
   }
 
-  console.log(mode);
-
   return (
     <section className="menu">
       <Link to={"/quiz/start"} className="menu-button-menu" onClick={() => dispatch(addMode(mode))}>
