@@ -15,7 +15,7 @@
         &-items
             @include mixins.flex-center
             flex-direction: column
-            animation: slideLeft .6s ease forwards
+            animation: slideBack .6s ease forwards
             animation-iteration-count: 1
             border: solid 1px black
             background-color: #ffe1e1
@@ -32,7 +32,7 @@
                 width: 100%
                 text-align: center
 
-@keyframes slideLeft
+@keyframes slideBack
     0%
         opacity: 0
         transform: translateY(60px)
