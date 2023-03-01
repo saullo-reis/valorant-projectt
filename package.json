@@ -48,7 +48,9 @@
     ]
   },
   "devDependencies": {
+    "@types/redux-mock-store": "^1.0.3",
     "jest": "^27.5.1",
-    "jst": "^0.0.13"
+    "jst": "^0.0.13",
+    "redux-mock-store": "^1.5.4"
   }
 }
