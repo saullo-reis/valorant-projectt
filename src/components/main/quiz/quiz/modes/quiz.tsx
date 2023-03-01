@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { QuizAgentTypes } from "../../../../../utils/types";
 import { getAgents } from "../../../../../gets/get";
 import { Link } from "react-router-dom";
 import "./styles-modes.sass/styles.sass";
 import { Loading } from "../../../../loading/roll/loading";
 
-export const Quiz = (time: {time: number}) => {
+export const Quiz = (time: { time: number }) => {
   const [agent, setAgent] = useState<QuizAgentTypes>();
   const [agents, setAgents] = useState<QuizAgentTypes[]>([]);
   const [fase, setFase] = useState<number>(1);
@@ -16,9 +16,15 @@ export const Quiz = (time: {time: number}) => {
   );
   const [count, setCount] = useState<number>(time.time);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [timeModify, setTimeModify] = useState<{
+    add: number;
+    decrement: number;
+  }>({
+    add: 0,
+    decrement: 0,
+  });
 
   //LOADING.
-
   useEffect(() => {
     if (agent !== undefined) {
       setTimeout(() => {
@@ -28,20 +34,25 @@ export const Quiz = (time: {time: number}) => {
   }, [agent]);
 
   // CRONÔMETRO.
-
-  function counter() {
-    setCount(count - 1);
-  }
-
+  const timeoutRef = useRef<any>(null);
   useEffect(() => {
-    if (isLoading === false) {
-      if (count !== 0) {
-        setTimeout(counter, 1000);
-      } else {
-        setFase(11);
-      }
+    if (count === 0) {
+      setFase(11);
     }
-  }, [count, isLoading]);
+    function startTimer() {
+      timeoutRef.current = setTimeout(() => {
+        if (count > 0) {
+          setCount(count - 1);
+          setTimeModify({ add: 0, decrement: 0 });
+        } else {
+          clearTimeout(timeoutRef.current);
+        }
+      }, 1000);
+    }
+
+    startTimer();
+    return () => clearTimeout(timeoutRef.current);
+  }, [count]);
 
   //BUSCANDO UM AGENTE ALEATORIO.
 
@@ -69,8 +80,12 @@ export const Quiz = (time: {time: number}) => {
       name.toLowerCase() === agent.displayName.toLowerCase()
     ) {
       setPontuation(pontuation + 1);
+      setCount(count + 5);
+      setTimeModify({add: 1, decrement:0})
     } else {
       setPontuation(pontuation - 1);
+      setCount(count - 2);
+      setTimeModify({add: 0, decrement:1});
     }
     setName("");
     setFase(fase + 1);
@@ -78,12 +93,14 @@ export const Quiz = (time: {time: number}) => {
 
   return (
     <section className="section">
-      {isLoading === true && <Loading/>}
+      {isLoading === true && <Loading />}
       {isLoading === false && (
         <>
           {fase !== 11 && (
             <div className="quiz">
               <span className="quiz-counter">{count} </span>
+              {timeModify.add === 1 && <span className="quiz-add">+5</span>}
+              {timeModify.decrement === 1 && <span className="quiz-decrement">-2</span>}
               <div className="quiz-questions">
                 {randomQuestion === 0 && (
                   <>

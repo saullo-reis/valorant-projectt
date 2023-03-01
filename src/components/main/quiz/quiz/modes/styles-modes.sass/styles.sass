@@ -13,6 +13,26 @@
         position: relative
         margin: 10px
         height: 70%
+        &-decrement
+            position: absolute
+            right: -40px
+            padding: 12px
+            border-bottom-left-radius: 8px
+            animation: slide 1.6s ease forwards
+            animation-iteration-count: 1
+            top: 0
+            color: #be0000
+            animation-name: slide
+        &-add
+            position: absolute
+            right: -40px
+            padding: 12px
+            border-bottom-left-radius: 8px
+            animation: slide 1.6s ease forwards
+            animation-iteration-count: 1
+            top: 0
+            color: #06be00
+            animation-name: slide
         &-counter
             position: absolute
             right: 0
@@ -73,15 +93,28 @@
         flex-direction: column
         &-text
             color: variable.$tertiaryColor
+            text-align: center
             font-weight: 700
         &-button
             background-color: variable.$tertiaryColor
             padding: 20px
             color: #fff
             cursor: pointer
+            text-align: center
             border-radius: 8px
             margin: 20px
             border: none
             transition: .3s
             &:hover
                 transform: scale(0.97)
+
+@keyframes slide
+    0%
+        opacity: 0
+        transform: translateY(30px)
+    50%
+        opacity: 1
+        transform: translateY(0)
+    100%
+        opacity: 0
+        transform: translateY(-30px)
