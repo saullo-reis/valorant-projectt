@@ -5,8 +5,9 @@ import { BrowserRouter } from "react-router-dom";
 import store from "../../store";
 import "@testing-library/jest-dom";
 import { QuizMenu } from "./quiz-menu";
-import { addMode } from "../../store/store";
 
+
+const handleClick = jest.fn()
 const renderComponent = () => {
   render(
     <Provider store={store}>
@@ -27,11 +28,9 @@ describe('Quiz menu test',() => {
         expect(screen.getByText("Difícil")).toBeInTheDocument();
     })
 
-    test('should dispatch addMode action with "easy" when easy mode is selected', () => {
+    test('should modify the variable for easy', () => {
       renderComponent()
-
-      const easyButton = screen.getByText("Fácil");
-
+  
     });
 
 })
