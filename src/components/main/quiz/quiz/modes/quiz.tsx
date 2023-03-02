@@ -80,7 +80,7 @@ export const Quiz = (time: { time: number }) => {
       name.toLowerCase() === agent.displayName.toLowerCase()
     ) {
       setPontuation(pontuation + 1);
-      setCount(count + 5);
+      setCount(count + 2);
       setTimeModify({add: 1, decrement:0})
     } else {
       setPontuation(pontuation - 1);
@@ -100,7 +100,7 @@ export const Quiz = (time: { time: number }) => {
           {fase !== 11 && (
             <div className="quiz">
               <span className="quiz-counter">{count} </span>
-              {timeModify.add === 1 && <span className="quiz-add">+5</span>}
+              {timeModify.add === 1 && <span className="quiz-add">+2</span>}
               {timeModify.decrement === 1 && <span className="quiz-decrement">-2</span>}
               <div className="quiz-questions">
                 {randomQuestion === 0 && (
