@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState} from 'react'
 import { fireEvent, render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
@@ -7,12 +7,12 @@ import "@testing-library/jest-dom";
 import { QuizMenu } from "./quiz-menu";
 
 
-const handleClick = jest.fn()
+
 const renderComponent = () => {
   render(
     <Provider store={store}>
       <BrowserRouter>
-        <QuizMenu/>
+        <QuizMenu />
       </BrowserRouter>
     </Provider>
   );
@@ -28,9 +28,13 @@ describe('Quiz menu test',() => {
         expect(screen.getByText("Difícil")).toBeInTheDocument();
     })
 
-    test('should modify the variable for easy', () => {
+    it('should modify the variable for easy', () => {
       renderComponent()
-  
+      
+      const buttonEasy = screen.getByText('Fácil')
+      fireEvent.click(buttonEasy)
+
+      
     });
 
 })
