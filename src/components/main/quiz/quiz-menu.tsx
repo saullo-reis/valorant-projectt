@@ -6,20 +6,10 @@ import { Link } from "react-router-dom";
 
 export const QuizMenu = () => {
   const [mode, setMode] = useState("");
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   function handleClick(modeButton: string) {
-    switch (modeButton) {
-      case "easy":
-        setMode("easy");
-        break;
-      case "medium":
-        setMode("medium");
-        break;
-      case "hard":
-        setMode("hard");
-        break;
-    }
+    return setMode(modeButton)
   }
 
   function buttonBackGroundColor(modeButton: string) {
@@ -30,7 +20,11 @@ export const QuizMenu = () => {
 
   return (
     <section className="menu">
-      <Link to={"/quiz/start"} className="menu-button-menu" onClick={() => dispatch(addMode(mode))}>
+      <Link
+        to={"/quiz/start"}
+        className="menu-button-menu"
+        onClick={() => dispatch(addMode(mode))}
+      >
         Iniciar
       </Link>
       <h1 className="menu-text">Selecione um modo</h1>
