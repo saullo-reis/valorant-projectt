@@ -9,7 +9,7 @@ export const QuizMenu = () => {
   const dispatch = useDispatch();
 
   function handleClick(modeButton: string) {
-    return setMode(modeButton)
+    return setMode(modeButton);
   }
 
   function buttonBackGroundColor(modeButton: string) {
