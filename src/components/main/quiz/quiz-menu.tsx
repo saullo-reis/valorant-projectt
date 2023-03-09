@@ -4,12 +4,13 @@ import {useDispatch} from 'react-redux'
 import { addMode } from "../../store/store";
 import { Link } from "react-router-dom";
 
-export const QuizMenu = () => {
+export const QuizMenu = ({setModeSpy}: any) => {
   const [mode, setMode] = useState("");
   const dispatch = useDispatch();
 
   function handleClick(modeButton: string) {
-    return setMode(modeButton);
+    setMode(modeButton);
+    setModeSpy(modeButton);
   }
 
   function buttonBackGroundColor(modeButton: string) {
@@ -20,13 +21,16 @@ export const QuizMenu = () => {
 
   return (
     <section className="menu">
-      <Link
-        to={"/quiz/start"}
-        className="menu-button-menu"
-        onClick={() => dispatch(addMode(mode))}
-      >
-        Iniciar
-      </Link>
+      {mode !== "" && (
+        <Link
+          to={"/quiz/start"}
+          className="menu-button-menu"
+          onClick={() => dispatch(addMode(mode))}
+        >
+          Iniciar
+        </Link>
+      )}
+
       <h1 className="menu-text">Selecione um modo</h1>
       <ul className="menu-container">
         <li
