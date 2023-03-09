@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const stock = createSlice({
     name: 'mode',
     initialState: {
-        mode: ''
+        mode: 'easy'
     },
     reducers: {
         addMode(state, action){
