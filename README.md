@@ -5,7 +5,7 @@
 ### Agentes:
 Você consegue ao entrar na aba agentes ver todos os agentes do VALORANT e suas habilidades.
 
-### Quiz
+### Quiz:
 O quiz você primeiro adiciona o MODO em que quer jogar, CADA modo tem uma quantidade de tempo em que você tem que escrever a resposta, a cada acerto você ganha + 2 segundos e a cada erro você perde -2 pontos, a pontuação máxima do quiz é 10/10, e tem como ficar negativo :P.
 
 ## Tecnologias utilizadas:
