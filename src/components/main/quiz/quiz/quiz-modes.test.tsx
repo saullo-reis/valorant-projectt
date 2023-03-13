@@ -1,9 +1,9 @@
 import React from "react";
 import { Modes } from "./quiz-modes";
 import { Provider } from "react-redux";
-import store, { RootState } from "../../../store";
+import store from "../../../store";
 import { BrowserRouter } from "react-router-dom";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 
 const renderComponent = () => {
   render(
@@ -24,13 +24,15 @@ jest.mock("react-redux", () => ({
 
 describe("Modes", () => {
   it("should render the easy quiz", async () => {
+    mockSelector.mockReturnValue("easy");
     renderComponent();
 
-    afterEach(() => {
-      mockSelector.mockReturnValue("easy");
-    });
-    
-    const easy = screen.getByTestId("easy-quiz")
-    expect(easy).toBeInTheDocument();
+    await waitFor(
+      () => {
+        const easy = screen.getByTestId("easy-quiz");
+        expect(easy).toBeInTheDocument();
+      },
+      { timeout: 3000 }
+    );
   });
 });
