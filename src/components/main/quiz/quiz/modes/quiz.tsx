@@ -29,7 +29,7 @@ export const Quiz = (time: { time: number }) => {
     if (agent !== undefined) {
       setTimeout(() => {
         setIsLoading(false);
-      }, 2000);
+      }, 500);
     }
   }, [agent]);
 
@@ -98,7 +98,7 @@ export const Quiz = (time: { time: number }) => {
       {isLoading === false && (
         <>
           {fase !== 11 && (
-            <div className="quiz">
+            <div className="quiz" data-testid='container'>
               <span className="quiz-counter">{count} </span>
               {timeModify.add === 1 && <span className="quiz-add">+2</span>}
               {timeModify.decrement === 1 && <span className="quiz-decrement">-2</span>}
