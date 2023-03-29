@@ -26,12 +26,17 @@ export interface QuizAgentTypes {
   displayName: string;
   abilities: Array<{
     displayName: string;
-  }>
+  }>;
   displayIcon: string;
   voiceLine: {
     mediaList: Array<{
       wave: string;
-    }>
-  }
+    }>;
+  };
   isPlayableCharacter: boolean;
+}
+
+export interface TimeModifyType {
+  add: number;
+  decrement: number;
 }

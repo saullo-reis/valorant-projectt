@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { QuizAgentTypes } from "../../../../../utils/types";
+import { QuizAgentTypes, TimeModifyType } from "../../../../../utils/types";
 import { getAgents } from "../../../../../gets/get";
 import { Link } from "react-router-dom";
 import "./styles-modes.sass/styles.sass";
@@ -16,10 +16,7 @@ export const Quiz = (time: { time: number }) => {
   );
   const [count, setCount] = useState<number>(time.time);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [timeModify, setTimeModify] = useState<{
-    add: number;
-    decrement: number;
-  }>({
+  const [timeModify, setTimeModify] = useState<TimeModifyType>({
     add: 0,
     decrement: 0,
   });
@@ -55,7 +52,6 @@ export const Quiz = (time: { time: number }) => {
   }, [count]);
 
   //BUSCANDO UM AGENTE ALEATORIO.
-
   useEffect(() => {
     const fetchData = async () => {
       const response = await getAgents();
@@ -73,7 +69,6 @@ export const Quiz = (time: { time: number }) => {
   }, [fase, agents]);
 
   //FUNÇÃO DO ONCLICK
-
   function handleClick() {
     if (
       agent !== undefined &&

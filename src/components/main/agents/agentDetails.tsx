@@ -7,10 +7,6 @@ import { Loading } from "../../loading/roll/loading";
 
 export const AgentDetails = () => {
   const [agentData, setAgentData] = useState<AgentTypes>();
-  const [ abilities, setAbilities ] = useState<Array<{
-    displayName: string,
-    displayIcon: string
-  }>>()
   const { id } = useParams();
   const [showRoleDescription, setShowRoleDescription] =
     useState<boolean>(false);
