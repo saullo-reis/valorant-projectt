@@ -4,6 +4,8 @@ import { getAgents } from "../../../../../gets/get";
 import { Link } from "react-router-dom";
 import "./styles-modes.sass/styles.sass";
 import { Loading } from "../../../../loading/roll/loading";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../store";
 
 export const Quiz = (time: { time: number }) => {
   const [agent, setAgent] = useState<QuizAgentTypes>();
@@ -20,6 +22,7 @@ export const Quiz = (time: { time: number }) => {
     add: 0,
     decrement: 0,
   });
+  const mode = useSelector((state: RootState) => state.stock.mode)
 
   //LOADING.
   useEffect(() => {
@@ -87,16 +90,31 @@ export const Quiz = (time: { time: number }) => {
     setFase(fase + 1);
   }
 
+  //TEST
+  const testId = () => {
+    switch (mode) {
+      case "easy":
+        return "easy-quiz";
+      case "medium":
+        return "medium-quiz";
+      case "hard":
+        return "hard-quiz";
+    }
+  }
+
+
   return (
     <section className="section">
       {isLoading === true && <Loading />}
       {isLoading === false && (
         <>
           {fase !== 11 && (
-            <div className="quiz" data-testid='container'>
+            <div className="quiz" data-testid="container">
               <span className="quiz-counter">{count} </span>
               {timeModify.add === 1 && <span className="quiz-add">+2</span>}
-              {timeModify.decrement === 1 && <span className="quiz-decrement">-2</span>}
+              {timeModify.decrement === 1 && (
+                <span className="quiz-decrement">-2</span>
+              )}
               <div className="quiz-questions">
                 {randomQuestion === 0 && (
                   <>

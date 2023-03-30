@@ -6,8 +6,8 @@ export const Modes = () => {
   const stock = useSelector((state: RootState) => state.stock.mode);
   return (
     <>
-      {stock === "easy" && <Quiz data-testid="easy-quiz" time={15} />}
-      {stock === "medium" && <Quiz data-testid="medium-quiz" time={10} />}
+      {stock === "easy" && <Quiz data-testid="easy-quiz" time={17} />}
+      {stock === "medium" && <Quiz data-testid="medium-quiz" time={12} />}
       {stock === "hard" && <Quiz data-testid="hard-quiz" time={7} />}
     </>
   );
