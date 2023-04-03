@@ -110,7 +110,9 @@ export const Quiz = (time: { time: number }) => {
         <>
           {fase !== 11 && (
             <div className="quiz" data-testid="container">
-              <span className="quiz-counter">{count} </span>
+              <span data-testid="timer" className="quiz-counter">
+                {count}{" "}
+              </span>
               {timeModify.add === 1 && <span className="quiz-add">+2</span>}
               {timeModify.decrement === 1 && (
                 <span className="quiz-decrement">-2</span>
@@ -118,7 +120,7 @@ export const Quiz = (time: { time: number }) => {
               <div className="quiz-questions">
                 {randomQuestion === 0 && (
                   <>
-                    <h1>De quem são essas habilidades?</h1>
+                    <h1 data-testid="text">De quem são essas habilidades?</h1>
                     <ul>
                       {agent?.abilities.map((element, index) => {
                         return <li key={index}>{element.displayName}</li>;
@@ -128,13 +130,13 @@ export const Quiz = (time: { time: number }) => {
                 )}
                 {randomQuestion === 1 && (
                   <>
-                    <h1>De quem é essa silhueta?</h1>
+                    <h1 data-testid="text">De quem é essa silhueta?</h1>
                     <img src={agent?.displayIcon} alt="icon"></img>
                   </>
                 )}
                 {randomQuestion === 2 && (
                   <>
-                    <h1>De quem é essa voz?</h1>
+                    <h1 data-testid="text">De quem é essa voz?</h1>
                     <ul>
                       {agent?.voiceLine.mediaList.map((element, index) => {
                         return (
