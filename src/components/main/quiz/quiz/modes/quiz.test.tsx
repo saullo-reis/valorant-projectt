@@ -16,15 +16,18 @@ describe('Quiz', () => {
         )
     }
 
-    it('should be render box', async () => {
-        renderComponent();
+    it("should be rendering a box", async () => {
+      renderComponent();
 
-        await waitFor(() => {
-            expect(screen.getByTestId('container')).toBeInTheDocument()
-        },{ timeout: 4000 })
-    })
+      await waitFor(
+        () => {
+          expect(screen.getByTestId("container")).toBeInTheDocument();
+        },
+        { timeout: 4000 }
+      );
+    });
 
-    it('should be render timer', async () => {
+    it('should be rendering the timer', async () => {
         renderComponent();
 
         await waitFor(
@@ -35,7 +38,7 @@ describe('Quiz', () => {
         );
     })
 
-    it('should be render texts', async () => {
+    it('should be rendering the texts', async () => {
         renderComponent();
 
         await waitFor(
@@ -47,7 +50,7 @@ describe('Quiz', () => {
         );
     })
 
-    it('should withdraw points', async () => {
+    it('should be removing 2 seconds', async () => {
         renderComponent()
 
         await waitFor(

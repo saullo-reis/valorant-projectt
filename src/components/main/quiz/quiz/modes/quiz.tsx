@@ -89,20 +89,7 @@ export const Quiz = (time: { time: number }) => {
     setName("");
     setFase(fase + 1);
   }
-
-  //TEST
-  const testId = () => {
-    switch (mode) {
-      case "easy":
-        return "easy-quiz";
-      case "medium":
-        return "medium-quiz";
-      case "hard":
-        return "hard-quiz";
-    }
-  }
-
-
+  
   return (
     <section className="section">
       {isLoading === true && <Loading />}
