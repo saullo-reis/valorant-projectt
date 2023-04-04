@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import { getAgents } from "../../../gets/get";
 import { AgentsType } from "../../../utils/types";
 import "../styles/stylesAgents.sass";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Loading } from "../../loading/roll/loading";
 
 export const Agents = () => {
   const [agents, setAgents] = useState<AgentsType[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (agents !== undefined) {
@@ -37,25 +38,25 @@ export const Agents = () => {
       {isLoading === false && (
         <>
           <h1 className="agents-title">AGENTES</h1>
-          <ul className="agents-list" >
+          <ul className="agents-list">
             {agents.map((element, index) => {
               return (
-                <>
-                  {element.isPlayableCharacter === true && (
-                    <li key={index} className="agents-list-items">
-                      <Link to={`/agente/${element.uuid}`}>
-                        <img
-                          className="agents-list-items-img"
-                          src={element.displayIcon}
-                          alt="img-agent"
-                        ></img>
-                        <p className="agents-list-items-name">
-                          {element.displayName}
-                        </p>
-                      </Link>
-                    </li>
-                  )}
-                </>
+                <li
+                  key={index}
+                  data-testid={element.displayName}
+                  className="agents-list-items"
+                  onClick={() => navigate(`/agente/${element.uuid}`)
+                }
+                >
+                  <img
+                    className="agents-list-items-img"
+                    src={element.displayIcon}
+                    alt="img-agent"
+                  ></img>
+                  <p className="agents-list-items-name">
+                    {element.displayName}
+                  </p>
+                </li>
               );
             })}
           </ul>
