@@ -4,7 +4,11 @@ import {useDispatch} from 'react-redux'
 import { addMode } from "../../store/store";
 import { Link } from "react-router-dom";
 
-export const QuizMenu = ({setModeSpy}: any) => {
+interface Props {
+  setModeSpy: (modeButton: string) => void;
+}
+
+export const QuizMenu = ({setModeSpy} : Props) => {
   const [mode, setMode] = useState("");
   const dispatch = useDispatch();
 
