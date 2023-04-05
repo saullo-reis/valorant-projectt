@@ -16,17 +16,18 @@ export const AgentDetails = () => {
     if (agentData !== undefined) {
       setTimeout(() => {
         setIsLoading(false);
-      }, 2000);
+      }, 500);
     }
   }, [agentData]);
 
+  console.log(id);
   useEffect(() => {
     const fetchData = async () => {
-      if (id !== undefined) {
-        const response = await getAgent(id);
-        response.data.abilities.splice(4, 1);
-        setAgentData(response.data);
-      }
+      const response = await getAgent(
+        id !== undefined ? id : 'f94c3b30-42be-e959-889c-5aa313dba261'
+      );
+      response.data.abilities.splice(4, 1);
+      setAgentData(response.data);
     };
     fetchData();
   }, []);
@@ -56,6 +57,7 @@ export const AgentDetails = () => {
                   onClick={() => {
                     handleClickDescriptionRole();
                   }}
+                  data-testid="image"
                   className="agent-infos-card-role-image"
                   alt={`Imagem da função`}
                   src={agentData?.role.displayIcon}
@@ -67,7 +69,7 @@ export const AgentDetails = () => {
                 )}
               </div>
 
-              <h2 className="agent-infos-card-name">
+              <h2 className="agent-infos-card-name" data-testid="name">
                 {agentData?.displayName}
               </h2>
             </div>
@@ -75,7 +77,7 @@ export const AgentDetails = () => {
           <ul className="agent-abilities">
             {agentData?.abilities.map((element, index) => {
               return (
-                <li key={index} className="agent-abilities-item">
+                <li data-testid={`skill${index}`} key={index} className="agent-abilities-item">
                   <img
                     className="agent-abilities-item-image"
                     alt="Imagem da habilidade"
