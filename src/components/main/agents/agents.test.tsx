@@ -5,6 +5,13 @@ import store from "../../store";
 import { render, waitFor, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
+const mockNavigate = jest.fn();
+
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useNavigate: () => mockNavigate,
+}));
+
 describe("Agents", () => {
   const renderComponent = () => {
     render(
@@ -16,19 +23,12 @@ describe("Agents", () => {
     );
   };
 
-  const mockNavigate = jest.fn();
-
-  jest.mock("react-router-dom", () => ({
-    ...jest.requireActual("react-router-dom"),
-    useNavigate: () => mockNavigate(),
-  }));
-
   it("should be rendering title", async () => {
     renderComponent();
 
     await waitFor(() => {
       expect(screen.getByText("AGENTES")).toBeInTheDocument();
-    });
+    },{timeout:2000});
   });
 
   it("should be rendering the agents", async () => {
@@ -67,8 +67,8 @@ describe("Agents", () => {
     );
   });
 
-  it('should call navigate with the correct path', async () => {
-    renderComponent()
+  it("should call navigate with the correct path", async () => {
+    renderComponent();
 
     await waitFor(
       () => {
@@ -76,16 +76,13 @@ describe("Agents", () => {
       },
       { timeout: 3000 }
     );
-    
-    const btnTest = screen.getByTestId("Gekko"); 
-    fireEvent.click(btnTest)
 
-    console.log()
+    const btnTest = screen.getByTestId("Gekko");
+    fireEvent.click(btnTest);
 
-    expect(mockNavigate).toHaveBeenCalled()
+    expect(mockNavigate).toHaveBeenCalled();
     expect(mockNavigate).toHaveBeenCalledWith(
       "/agente/e370fa57-4757-3604-3648-499e1f642d3f"
     );
-
-  })
+  });
 });

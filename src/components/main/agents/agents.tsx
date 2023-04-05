@@ -45,8 +45,15 @@ export const Agents = () => {
                   key={index}
                   data-testid={element.displayName}
                   className="agents-list-items"
-                  onClick={() => navigate(`/agente/${element.uuid}`)
-                }
+                  onClick={() =>
+                    navigate(
+                      `/agente/${
+                        element.uuid !== undefined
+                          ? element.uuid
+                          : "f94c3b30-42be-e959-889c-5aa313dba261"
+                      }`
+                    )
+                  }
                 >
                   <img
                     className="agents-list-items-img"
