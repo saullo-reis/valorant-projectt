@@ -9,28 +9,32 @@ export const Agents = () => {
   const [agents, setAgents] = useState<AgentsType[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const navigate = useNavigate();
+  const checkingIfAgentsIsDifferentOfUndefined = agents !== undefined
 
-  useEffect(() => {
-    if (agents !== undefined) {
+  function checkingIfIsLoading(){
+    if(checkingIfAgentsIsDifferentOfUndefined){
       setTimeout(() => {
         setIsLoading(false);
       }, 1000);
     }
-  }, [agents]);
+  }
+
+  const fetchData = async () => {
+    const response = await getAgents();
+    const arrayOfAgents: any = []
+    response.data.forEach((element: AgentsType) => {
+      if (element.isPlayableCharacter) {
+        arrayOfAgents.push(element)
+      }
+
+    });
+    setAgents(arrayOfAgents);
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await getAgents();
-      const responseMap = response.data.map((element: AgentsType) => {
-        if (element.isPlayableCharacter === true) {
-          return element;
-        } else {
-          return {};
-        }
-      });
-      setAgents(responseMap);
-    };
+    checkingIfIsLoading()
     fetchData();
-  }, []);
+  }, [checkingIfAgentsIsDifferentOfUndefined]);
 
   return (
     <section className="agents">
@@ -39,11 +43,11 @@ export const Agents = () => {
         <>
           <h1 className="agents-title">AGENTES</h1>
           <ul className="agents-list">
-            {agents.map((element, index) => {
+            {agents?.map((element, index) => {
               return (
                 <li
                   key={index}
-                  data-testid={element.displayName}
+                  data-testid={element?.displayName}
                   className="agents-list-items"
                   onClick={() =>
                     navigate(
@@ -57,11 +61,11 @@ export const Agents = () => {
                 >
                   <img
                     className="agents-list-items-img"
-                    src={element.displayIcon}
+                    src={element?.displayIcon}
                     alt="img-agent"
                   ></img>
                   <p className="agents-list-items-name">
-                    {element.displayName}
+                    {element?.displayName}
                   </p>
                 </li>
               );

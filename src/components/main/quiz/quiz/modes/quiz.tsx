@@ -24,7 +24,6 @@ export const Quiz = (time: { time: number }) => {
   });
   const mode = useSelector((state: RootState) => state.stock.mode)
 
-  //LOADING.
   useEffect(() => {
     if (agent !== undefined) {
       setTimeout(() => {
@@ -33,7 +32,6 @@ export const Quiz = (time: { time: number }) => {
     }
   }, [agent]);
 
-  // CRONÔMETRO.
   const timeoutRef = useRef<any>(null);
   useEffect(() => {
     if (count <= 0) {
@@ -54,7 +52,6 @@ export const Quiz = (time: { time: number }) => {
     return () => clearTimeout(timeoutRef.current);
   }, [count]);
 
-  //BUSCANDO UM AGENTE ALEATORIO.
   useEffect(() => {
     const fetchData = async () => {
       const response = await getAgents();
@@ -71,7 +68,6 @@ export const Quiz = (time: { time: number }) => {
     }
   }, [fase, agents]);
 
-  //FUNÇÃO DO ONCLICK
   function handleClick() {
     if (
       agent !== undefined &&

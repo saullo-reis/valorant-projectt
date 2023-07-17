@@ -8,37 +8,39 @@ import { Loading } from "../../loading/roll/loading";
 export const AgentDetails = () => {
   const [agentData, setAgentData] = useState<AgentTypes>();
   const { id } = useParams();
-  const [showRoleDescription, setShowRoleDescription] =
-    useState<boolean>(false);
+  const [showRoleDescription, setShowRoleDescription] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const checkingIfAgentsIsDifferentOfUndefined = agentData !== undefined
 
-  useEffect(() => {
-    if (agentData !== undefined) {
+  function checkingIfIsLoading() {
+    if (checkingIfAgentsIsDifferentOfUndefined) {
       setTimeout(() => {
         setIsLoading(false);
-      }, 500);
-    }
-  }, [agentData]);
-
-  console.log(id);
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await getAgent(
-        id !== undefined ? id : 'f94c3b30-42be-e959-889c-5aa313dba261'
-      );
-      response.data.abilities.splice(4, 1);
-      setAgentData(response.data);
-    };
-    fetchData();
-  }, []);
-
-  function handleClickDescriptionRole() {
-    if (showRoleDescription === false) {
-      setShowRoleDescription(true);
-    } else {
-      setShowRoleDescription(false);
+      }, 1000);
     }
   }
+  
+  const fetchData = async () => {
+    const response = await getAgent(
+      id !== undefined ? id : 'f94c3b30-42be-e959-889c-5aa313dba261'
+    );
+    response.data.abilities.splice(4, 1);
+    setAgentData(response.data);
+  };
+
+  useEffect(() => {
+    checkingIfIsLoading()
+    fetchData()
+  }, [checkingIfAgentsIsDifferentOfUndefined]);
+
+  function handleClickDescriptionRole() {
+    if (!showRoleDescription) {
+      setShowRoleDescription(true);
+      return
+    }
+     setShowRoleDescription(false);
+  }
+  
 
   return (
     <section className="agent">
