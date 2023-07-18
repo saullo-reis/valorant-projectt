@@ -36,7 +36,7 @@ export interface QuizAgentTypes {
   isPlayableCharacter: boolean;
 }
 
-export interface TimeModifyType {
+export interface addOrDecrementTimeType {
   add: number;
   decrement: number;
 }

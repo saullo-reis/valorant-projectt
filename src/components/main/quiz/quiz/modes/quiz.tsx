@@ -1,11 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
-import { QuizAgentTypes, TimeModifyType } from "../../../../../utils/types";
+import { QuizAgentTypes, addOrDecrementTimeType } from "../../../../../utils/types";
 import { getAgents } from "../../../../../gets/get";
 import { Link } from "react-router-dom";
 import "./styles-modes.sass/styles.sass";
 import { Loading } from "../../../../loading/roll/loading";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../../store";
 
 export const Quiz = (time: { time: number }) => {
   const [agent, setAgent] = useState<QuizAgentTypes>();
@@ -16,76 +14,85 @@ export const Quiz = (time: { time: number }) => {
   const [randomQuestion, setRandomQuestion] = useState<number>(
     Math.floor(Math.random() * 3)
   );
+  const agentsExist = agents !== undefined
+  const timeoutRef = useRef<any>(null)
+  const isACorrectAnswer = agent !== undefined && name.toLowerCase() === agent.displayName.toLowerCase()
   const [count, setCount] = useState<number>(time.time);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [timeModify, setTimeModify] = useState<TimeModifyType>({
+  const [addOrDecrementTime, setAddOrDecrementTime] = useState<addOrDecrementTimeType>({
     add: 0,
     decrement: 0,
   });
-  const mode = useSelector((state: RootState) => state.stock.mode)
+  const timeout = count <= 0
 
-  useEffect(() => {
-    if (agent !== undefined) {
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 500);
+  const fetchData = async () => {
+    const response = await getAgents();
+    setAgents(response.data);
+  };
+
+  function getRandowQuestionAndRandomAgent() {
+    if (agentsExist) {
+      setRandomQuestion(Math.floor(Math.random() * 3));
+      const randomAgent = Math.floor(Math.random() * 21);
+      setAgent(agents[randomAgent]);
     }
-  }, [agent]);
+  }
 
-  const timeoutRef = useRef<any>(null);
   useEffect(() => {
-    if (count <= 0) {
+    if (timeout) {
       setFase(11);
     }
     function startTimer() {
       timeoutRef.current = setTimeout(() => {
         if (count > 0) {
           setCount(count - 1);
-          setTimeModify({ add: 0, decrement: 0 });
+          setAddOrDecrementTime({ add: 0, decrement: 0 });
         } else {
           clearTimeout(timeoutRef.current);
         }
       }, 1000);
     }
-    
+
     startTimer();
     return () => clearTimeout(timeoutRef.current);
   }, [count]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await getAgents();
-      setAgents(response.data);
-    };
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    if (agents !== undefined) {
-      setRandomQuestion(Math.floor(Math.random() * 3));
-      const randomAgent = Math.floor(Math.random() * 21);
-      setAgent(agents[randomAgent]);
+    fetchData()
+    if (agentsExist && isLoading) {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 500);
     }
-  }, [fase, agents]);
+    if(!isLoading){
+      getRandowQuestionAndRandomAgent()
+    }
+  }, [fase]);
+
+  function addPointsAndTime() {
+    setPontuation(pontuation + 1)
+    setCount(count + 2)
+    setAddOrDecrementTime({ add: 1, decrement: 0 })
+  }
+  function removePointsAndTime() {
+    setPontuation(pontuation - 1);
+    setCount(count - 2)
+    setAddOrDecrementTime({ add: 0, decrement: 1 });
+  }
+  function nextFase() {
+    setName("")
+    setFase(fase + 1)
+  }
 
   function handleClick() {
-    if (
-      agent !== undefined &&
-      name.toLowerCase() === agent.displayName.toLowerCase()
-    ) {
-      setPontuation(pontuation + 1);
-      setCount(count + 2);
-      setTimeModify({add: 1, decrement:0})
+    if (isACorrectAnswer) {
+      addPointsAndTime()
     } else {
-      setPontuation(pontuation - 1);
-        setCount(count - 2)
-
-      setTimeModify({add: 0, decrement:1});
+      removePointsAndTime()
     }
-    setName("");
-    setFase(fase + 1);
+    nextFase()
   }
-  
+
   return (
     <section className="section">
       {isLoading === true && <Loading />}
@@ -96,8 +103,8 @@ export const Quiz = (time: { time: number }) => {
               <span data-testid="timer" className="quiz-counter">
                 {count}{" "}
               </span>
-              {timeModify.add === 1 && <span className="quiz-add">+2</span>}
-              {timeModify.decrement === 1 && (
+              {addOrDecrementTime.add === 1 && <span className="quiz-add">+2</span>}
+              {addOrDecrementTime.decrement === 1 && (
                 <span className="quiz-decrement">-2</span>
               )}
               <div className="quiz-questions">
